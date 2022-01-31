@@ -1,15 +1,13 @@
 package no.hvl.dat153.namequizapp.logic;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.app.Application;
 
-import java.io.File;
 import java.util.ArrayList;
 
-public class Database {
+public class Database extends Application {
 
-    private ArrayList<ClassMate> classmatesDB;
+    private ArrayList<ClassMate> classmatesDB = new ArrayList<>();
+
 
     public Database (ArrayList<ClassMate> classmatesDB) {
         this.classmatesDB = classmatesDB;
@@ -35,7 +33,9 @@ public class Database {
         addClassMate(new ClassMate("woof","dog"));
         addClassMate(new ClassMate("tspst","ferret"));
 
-        return new Database(classmatesDB);
+        Database db = new Database(classmatesDB);
+
+        return db;
     }
 
 

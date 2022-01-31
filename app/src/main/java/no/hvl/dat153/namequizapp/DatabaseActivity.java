@@ -30,7 +30,6 @@ import no.hvl.dat153.namequizapp.logic.Database;
 
 public class DatabaseActivity extends AppCompatActivity {
 
-    private Database db = new Database(new ArrayList<>());
     private int i = 0;
     private TextView textView;
     private ImageView imageView;
@@ -40,19 +39,15 @@ public class DatabaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-        db = db.createDatabase();
 
-        Toast.makeText(this, db.getClassmatesDB().size() + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ((Database) getApplication()).getClassmatesDB().size() + "", Toast.LENGTH_SHORT).show();
 
         textView = findViewById(R.id.arraylistText);
-        textView.setText(db.getClassmatesDB().get(i).getName());
+        textView.setText(((Database) getApplication()).getClassmatesDB().get(i).getName());
         imageView = findViewById(R.id.imageViewClassmate);
-        imageView.setImageDrawable(makeDrawable(db.getClassmatesDB().get(i).getName()));
+        imageView.setImageDrawable(makeDrawable(((Database) getApplication()).getClassmatesDB().get(i).getName()));
 
         updateI();
-
-     //   Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      //  String json = gson.toJson(db.getClassmatesDB());
 
     }
 
@@ -69,12 +64,12 @@ public class DatabaseActivity extends AppCompatActivity {
         textView = findViewById(R.id.arraylistText);
         imageView = findViewById(R.id.imageViewClassmate);
 
-        textView.setText(db.getClassmatesDB().get(i).getName());
-        imageView.setImageDrawable(makeDrawable(db.getClassmatesDB().get(i).getName()));
+        textView.setText(((Database) getApplication()).getClassmatesDB().get(i).getName());
+        imageView.setImageDrawable(makeDrawable(((Database) getApplication()).getClassmatesDB().get(i).getName()));
 
         try {
             Thread.sleep(500);
-            if (i == db.getClassmatesDB().size() - 1) {
+            if (i == ((Database) getApplication()).getClassmatesDB().size() - 1) {
                 i = 0;
             } else {
                 updateI();
