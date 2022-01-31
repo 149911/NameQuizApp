@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,13 +51,8 @@ public class DatabaseActivity extends AppCompatActivity {
 
         updateI();
 
-        try {
-            Thread.sleep(500);
-            getIntent().putParcelableArrayListExtra("db", (ArrayList<? extends Parcelable>) db.getClassmatesDB());
-        } catch (InterruptedException e) {
-
-        }
-
+     //   Gson gson = new GsonBuilder().setPrettyPrinting().create();
+      //  String json = gson.toJson(db.getClassmatesDB());
 
     }
 
