@@ -29,8 +29,13 @@ public class Database {
         classmatesDB.add(cm);
     }
 
-    public void createDatabase() {
-        classmatesDB = new ArrayList<ClassMate>();
+    public Database createDatabase() {
+        addClassMate(new ClassMate("meow","cat"));
+        addClassMate(new ClassMate("neigh","horse"));
+        addClassMate(new ClassMate("woof","dog"));
+        addClassMate(new ClassMate("tspst","ferret"));
+
+        return new Database(classmatesDB);
     }
 
 

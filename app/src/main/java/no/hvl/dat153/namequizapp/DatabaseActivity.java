@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,22 +28,18 @@ import no.hvl.dat153.namequizapp.logic.Database;
 
 public class DatabaseActivity extends AppCompatActivity {
 
-    final private Database db = new Database(new ArrayList<>());
+    private Database db = new Database(new ArrayList<>());
     private int i = 0;
     private TextView textView;
     private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-        db.addClassMate(new ClassMate("meow","cat"));
-        db.addClassMate(new ClassMate("neigh","horse"));
-        db.addClassMate(new ClassMate("woof","dog"));
-        db.addClassMate(new ClassMate("tspst","ferret"));
+        db = db.createDatabase();
 
-     //   SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-     //   String username = sharedPreferences.getString("database", "");
         Toast.makeText(this, db.getClassmatesDB().size() + "", Toast.LENGTH_SHORT).show();
 
         textView = findViewById(R.id.arraylistText);
@@ -51,6 +48,14 @@ public class DatabaseActivity extends AppCompatActivity {
         imageView.setImageDrawable(makeDrawable(db.getClassmatesDB().get(i).getName()));
 
         updateI();
+
+        try {
+            Thread.sleep(500);
+            getIntent().putParcelableArrayListExtra("db", (ArrayList<? extends Parcelable>) db.getClassmatesDB());
+        } catch (InterruptedException e) {
+
+        }
+
 
     }
 
@@ -121,20 +126,4 @@ public class DatabaseActivity extends AppCompatActivity {
         this.sendBroadcast(mediaScanIntent);
     }
 
-    public void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        Gson gson = new Gson();
-
-        String json = gson.toJson(db.getClassmatesDB());
-
-        editor.putString("classmates", json);
-
-        editor.apply();
-
-        Toast.makeText(this, "Saved classmate to arraylist", Toast.LENGTH_SHORT).show();
-
-    }
 }
