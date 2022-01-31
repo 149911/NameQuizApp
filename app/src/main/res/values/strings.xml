@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Name of Classmates Quiz</string>
+    <string name="databaseBtnText">Database</string>
+    <string name="playBtnText">Play</string>
+    <string name="activityDatabaseText">Database</string>
+    <string name="activityPlayquizText">Quiz</string>
+    <string name="welcome">Welcome, Good Luck!</string>
+    <string name="addclassmate">Add classmate</string>
+    <string name="nextText">next</string>
+    <string name="camera_or_storage">Get picture from...</string>
+    <string name="take_photo">Camera</string>
+    <string name="picture_storage">Storage</string>
+</resources>
