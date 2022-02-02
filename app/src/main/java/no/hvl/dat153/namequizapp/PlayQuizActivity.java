@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -18,34 +19,30 @@ import no.hvl.dat153.namequizapp.logic.Database;
 
 public class PlayQuizActivity extends AppCompatActivity {
 
-
-    private Database db = new Database();
     private ImageView imageView;
     private TextView textView;
     private TextView alt1;
     private TextView alt2;
+    private int numberOfCorrect = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playquiz);
 
-        View view = new View(getApplicationContext());
+        //db.setClassmatesDB( ((Database) getApplication()).getClassmatesDB() );
 
+
+        View view = new View(getApplicationContext());
         correctOrWrong(view);
 
     }
 
-   // public void playQuiz() {
-
-   // }
-
     public String generateQuestionWithAnswer() {
-        db.setClassmatesDB( ((Database) getApplication()).getClassmatesDB() );
         Random rand = new Random();
-        int randomIndex = rand.nextInt(db.getClassmatesDB().size());
+        int randomIndex = rand.nextInt(((Database) getApplication()).getClassmatesDB().size());
 
-        String question = db.getClassmatesDB().get(randomIndex).getName();
+        String question = ((Database) getApplication()).getClassmatesDB().get(randomIndex).getName();
         imageView = findViewById(R.id.imageQuiz);
         imageView.setImageDrawable(makeDrawable(question));
 
@@ -58,7 +55,7 @@ public class PlayQuizActivity extends AppCompatActivity {
         alt1.setText(question);
 
         ArrayList<String> alt = new ArrayList<>();
-        db.getClassmatesDB().forEach(p -> alt.add(p.getName()));
+        ((Database) getApplication()).getClassmatesDB().forEach(p -> alt.add(p.getName()));
 
         Random rand2 = new Random();
         int randomIndex2 = rand2.nextInt(alt.size());
@@ -85,20 +82,23 @@ public class PlayQuizActivity extends AppCompatActivity {
         String correctAnswer = generateQuestionWithAnswer();
         alt1 = findViewById(R.id.alternative1);
         alt2 = findViewById(R.id.alternative2);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE);
+        Intent launchActivity = new Intent(PlayQuizActivity.this, ResultActivity.class);
 
         if (alt1.getId() == v.getId()) {
             if (alt1.getText().equals(correctAnswer) ) {
-                Toast.makeText(this, "Correct!", Toast.LENGTH_LONG).show();
+                numberOfCorrect++;
+                Toast.makeText(this, String.valueOf(numberOfCorrect), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Wrong!", Toast.LENGTH_LONG).show();
-                Intent launchActivity = new Intent(PlayQuizActivity.this, ResultActivity.class);
+                sharedPreferences.edit().putInt("numberofcorrect", numberOfCorrect).apply();
                 startActivity(launchActivity);
             }
         } else if (alt2.getId() == v.getId()) {
             if (alt2.getText().equals(correctAnswer) ) {
-                Toast.makeText(this, "Correct!", Toast.LENGTH_LONG).show();
+                numberOfCorrect++;
             } else {
-                Toast.makeText(this, "Wrong!", Toast.LENGTH_LONG).show();
+                sharedPreferences.edit().putInt("numberofcorrect", numberOfCorrect).apply();
+                startActivity(launchActivity);
             }
         }
 
