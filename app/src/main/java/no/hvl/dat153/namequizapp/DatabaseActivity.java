@@ -10,11 +10,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +28,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import no.hvl.dat153.namequizapp.logic.ClassMate;
 import no.hvl.dat153.namequizapp.logic.Database;
@@ -59,8 +64,10 @@ public class DatabaseActivity extends AppCompatActivity {
     }
 
 
+
+
     public void nextClassmate(View v) {
-        //Context c = getBaseContext();
+
         textView = findViewById(R.id.arraylistText);
         imageView = findViewById(R.id.imageViewClassmate);
 
@@ -116,6 +123,13 @@ public class DatabaseActivity extends AppCompatActivity {
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return false;
     }
 
 }

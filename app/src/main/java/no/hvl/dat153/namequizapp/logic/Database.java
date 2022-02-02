@@ -38,6 +38,11 @@ public class Database extends Application {
         return db;
     }
 
+    public boolean deleteClassMate(int position) {
+        classmatesDB.remove(position);
+        return true;
+    }
+
 
     @Override
     public String toString() {

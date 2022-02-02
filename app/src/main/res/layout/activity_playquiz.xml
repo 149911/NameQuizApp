@@ -19,4 +19,43 @@
         android:layout_marginTop="100dp"
     />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageQuiz"
+        android:layout_below="@+id/text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+
+    />
+
+    <TextView
+        android:id="@+id/alternative1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textSize="33sp"
+
+        android:layout_below="@+id/imageQuiz"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="100dp"
+        android:onClick="correctOrWrong"
+        />
+
+    <TextView
+        android:id="@+id/alternative2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textSize="33sp"
+
+        android:layout_below="@+id/imageQuiz"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="250dp"
+        android:onClick="correctOrWrong"
+        />
+
 </RelativeLayout>
