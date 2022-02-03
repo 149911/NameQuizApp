@@ -38,9 +38,8 @@ public class Database extends Application {
         return db;
     }
 
-    public boolean deleteClassMate(int position) {
-        classmatesDB.remove(position);
-        return true;
+    public void deleteDB() {
+        classmatesDB = new ArrayList<>();
     }
 
 

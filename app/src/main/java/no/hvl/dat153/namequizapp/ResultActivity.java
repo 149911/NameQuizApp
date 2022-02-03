@@ -25,6 +25,6 @@ public class ResultActivity extends AppCompatActivity {
 
     public void homePage(View v) {
         Intent intent = new Intent(ResultActivity.this, MainActivity.class);
-        startActivity(intent);
+        startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 }

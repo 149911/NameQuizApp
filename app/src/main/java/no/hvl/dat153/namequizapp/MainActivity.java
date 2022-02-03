@@ -10,27 +10,32 @@ import no.hvl.dat153.namequizapp.logic.Database;
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean dbMade = false;
+    private boolean dbMade;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (!dbMade) {
+        if (savedInstanceState == null) {
             ((Database) getApplication()).createDatabase();
-            dbMade = true;
         }
 
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestart() {
+        super.onRestart();
+        dbMade = true;
 
-        if (dbMade) {
-            setContentView(R.layout.activity_main);
-        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        ((Database) getApplication()).deleteDB();
 
     }
 

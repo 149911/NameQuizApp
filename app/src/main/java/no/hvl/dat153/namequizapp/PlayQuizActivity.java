@@ -61,17 +61,15 @@ public class PlayQuizActivity extends AppCompatActivity {
         int randomIndex2 = rand2.nextInt(alt.size());
         String alternative2 = alt.get(randomIndex2);
 
-        if (randomIndex != randomIndex2) {
-            alt2.setText(alternative2);
-        } else {
+        if (randomIndex == randomIndex2) {
             if (randomIndex2 == 0) {
                 randomIndex2++;
             } else {
                 randomIndex2--;
             }
             alternative2 = alt.get(randomIndex2);
-            alt2.setText(alternative2);
         }
+        alt2.setText(alternative2);
 
         return question;
 
@@ -91,14 +89,14 @@ public class PlayQuizActivity extends AppCompatActivity {
                 Toast.makeText(this, String.valueOf(numberOfCorrect), Toast.LENGTH_SHORT).show();
             } else {
                 sharedPreferences.edit().putInt("numberofcorrect", numberOfCorrect).apply();
-                startActivity(launchActivity);
+                startActivity(launchActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         } else if (alt2.getId() == v.getId()) {
             if (alt2.getText().equals(correctAnswer) ) {
                 numberOfCorrect++;
             } else {
                 sharedPreferences.edit().putInt("numberofcorrect", numberOfCorrect).apply();
-                startActivity(launchActivity);
+                startActivity(launchActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         }
 
