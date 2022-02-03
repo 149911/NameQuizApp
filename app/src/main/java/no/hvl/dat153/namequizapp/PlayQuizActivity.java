@@ -20,7 +20,6 @@ import no.hvl.dat153.namequizapp.logic.Database;
 public class PlayQuizActivity extends AppCompatActivity {
 
     private ImageView imageView;
-    private TextView textView;
     private TextView alt1;
     private TextView alt2;
     private int numberOfCorrect = 0;
@@ -29,9 +28,6 @@ public class PlayQuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playquiz);
-
-        //db.setClassmatesDB( ((Database) getApplication()).getClassmatesDB() );
-
 
         View view = new View(getApplicationContext());
         correctOrWrong(view);
