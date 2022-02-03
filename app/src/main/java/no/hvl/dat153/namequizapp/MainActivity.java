@@ -18,16 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            ((Database) getApplication()).createDatabase();
-        }
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        dbMade = true;
+        ((Database) getApplication()).createDatabase();
 
     }
 

@@ -7,55 +7,74 @@
     tools:context=".MainActivity"
     android:background="@color/cyan">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="@string/activityPlayquizText"
-        android:textSize="33sp"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-    />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageQuiz"
-        android:layout_below="@+id/text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
 
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-
+        android:background="@drawable/imageviewbackground"
     />
 
-    <TextView
-        android:id="@+id/alternative1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:textSize="33sp"
-
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1"
         android:layout_below="@+id/imageQuiz"
-        android:layout_marginTop="100dp"
-        android:layout_marginHorizontal="100dp"
-        android:onClick="correctOrWrong"
-        />
+        android:layout_marginTop="300dp"
+        >
 
-    <TextView
-        android:id="@+id/alternative2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TableRow>
 
-        android:textSize="33sp"
+            <TextView
+                android:id="@+id/alt1"
+                android:layout_marginLeft="50dp"
+                android:layout_width="150dp"
+                android:layout_marginRight="10dp"
 
-        android:layout_below="@+id/imageQuiz"
-        android:layout_marginTop="100dp"
-        android:layout_marginHorizontal="250dp"
-        android:onClick="correctOrWrong"
-        />
+                android:textColor="@color/white"
+                android:background="@drawable/boxwithroundcorner"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/alt2"
+                android:layout_marginRight="50dp"
+                android:layout_width="150dp"
+
+                android:text="hrllo"
+                android:textColor="@color/white"
+                android:background="@drawable/boxwithroundcorner"
+                android:textAlignment="center"/>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/alt3"
+                android:layout_marginLeft="50dp"
+                android:layout_width="150dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+
+                android:text="hrllo"
+                android:textColor="@color/white"
+                android:background="@drawable/boxwithroundcorner"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/alt4"
+                android:layout_marginRight="50dp"
+                android:layout_width="150dp"
+                android:layout_marginTop="5dp"
+
+                android:text="hrllo"
+                android:textColor="@color/white"
+                android:background="@drawable/boxwithroundcorner"
+                android:textAlignment="center"/>
+        </TableRow>
+
+    </TableLayout>
+
 
 </RelativeLayout>

@@ -38,8 +38,7 @@
         <activity
             android:name=".PlayQuizActivity"
             android:parentActivityName=".MainActivity"
-            android:exported="true"
-            android:launchMode="singleTop">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -46,11 +46,8 @@ public class PlayQuizActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageQuiz);
         imageView.setImageDrawable(makeDrawable(question));
 
-        textView = findViewById(R.id.text);
-        textView.setText(((Database) getApplication()).getClassmatesDB().size()+ "");
-
-        alt1 = findViewById(R.id.alternative1);
-        alt2 = findViewById(R.id.alternative2);
+        alt1 = findViewById(R.id.alt1);
+        alt2 = findViewById(R.id.alt2);
 
         alt1.setText(question);
 
@@ -78,8 +75,8 @@ public class PlayQuizActivity extends AppCompatActivity {
 
     public void correctOrWrong(View v) {
         String correctAnswer = generateQuestionWithAnswer();
-        alt1 = findViewById(R.id.alternative1);
-        alt2 = findViewById(R.id.alternative2);
+        alt1 = findViewById(R.id.alt1);
+        alt2 = findViewById(R.id.alt2);
         SharedPreferences sharedPreferences = this.getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE);
         Intent launchActivity = new Intent(PlayQuizActivity.this, ResultActivity.class);
 
