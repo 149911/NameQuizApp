@@ -16,12 +16,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import no.hvl.dat153.namequizapp.logic.Database;
+import no.hvl.dat153.namequizapp.logic.Quiz;
 
 public class PlayQuizActivity extends AppCompatActivity {
 
     private ImageView imageView;
+    private ArrayList<TextView> textViews = new ArrayList<>();
     private TextView alt1;
     private TextView alt2;
+    private TextView alt3;
+    private TextView alt4;
     private int numberOfCorrect = 0;
 
     @Override
@@ -29,69 +33,22 @@ public class PlayQuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playquiz);
 
-        View view = new View(getApplicationContext());
-        correctOrWrong(view);
-
-    }
-
-    public String generateQuestionWithAnswer() {
-        Random rand = new Random();
-        int randomIndex = rand.nextInt(((Database) getApplication()).getClassmatesDB().size());
-
-        String question = ((Database) getApplication()).getClassmatesDB().get(randomIndex).getName();
         imageView = findViewById(R.id.imageQuiz);
-        imageView.setImageDrawable(makeDrawable(question));
-
         alt1 = findViewById(R.id.alt1);
         alt2 = findViewById(R.id.alt2);
+        alt3 = findViewById(R.id.alt3);
+        alt4 = findViewById(R.id.alt4);
 
-        alt1.setText(question);
-
-        ArrayList<String> alt = new ArrayList<>();
-        ((Database) getApplication()).getClassmatesDB().forEach(p -> alt.add(p.getName()));
-
-        Random rand2 = new Random();
-        int randomIndex2 = rand2.nextInt(alt.size());
-        String alternative2 = alt.get(randomIndex2);
-
-        if (randomIndex == randomIndex2) {
-            if (randomIndex2 == 0) {
-                randomIndex2++;
-            } else {
-                randomIndex2--;
-            }
-            alternative2 = alt.get(randomIndex2);
-        }
-        alt2.setText(alternative2);
-
-        return question;
-
-    }
+        textViews.add(alt1);
+        textViews.add(alt2);
+        textViews.add(alt3);
+        textViews.add(alt4);
 
 
-    public void correctOrWrong(View v) {
-        String correctAnswer = generateQuestionWithAnswer();
-        alt1 = findViewById(R.id.alt1);
-        alt2 = findViewById(R.id.alt2);
-        SharedPreferences sharedPreferences = this.getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE);
-        Intent launchActivity = new Intent(PlayQuizActivity.this, ResultActivity.class);
 
-        if (alt1.getId() == v.getId()) {
-            if (alt1.getText().equals(correctAnswer) ) {
-                numberOfCorrect++;
-                Toast.makeText(this, String.valueOf(numberOfCorrect), Toast.LENGTH_SHORT).show();
-            } else {
-                sharedPreferences.edit().putInt("numberofcorrect", numberOfCorrect).apply();
-                startActivity(launchActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
-        } else if (alt2.getId() == v.getId()) {
-            if (alt2.getText().equals(correctAnswer) ) {
-                numberOfCorrect++;
-            } else {
-                sharedPreferences.edit().putInt("numberofcorrect", numberOfCorrect).apply();
-                startActivity(launchActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
-        }
+        Quiz q = new Quiz();
+
+        q.randomizeAnswers( new ArrayList<String>() {{add("Simen"); add("what"); add("mathilde"); add("eple");}}, "what", textViews );
 
     }
 
