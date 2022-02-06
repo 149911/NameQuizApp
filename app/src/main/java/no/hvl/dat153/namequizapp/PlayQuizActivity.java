@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import no.hvl.dat153.namequizapp.logic.Database;
 import no.hvl.dat153.namequizapp.logic.Quiz;
@@ -22,11 +21,10 @@ public class PlayQuizActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private ArrayList<TextView> textViews = new ArrayList<>();
-    private TextView alt1;
-    private TextView alt2;
-    private TextView alt3;
-    private TextView alt4;
-    private int numberOfCorrect = 0;
+
+    private String correctAnswer;
+    private ArrayList<String> possibleAnswers = new ArrayList<>();
+    private Quiz q = new Quiz();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +32,51 @@ public class PlayQuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_playquiz);
 
         imageView = findViewById(R.id.imageQuiz);
-        alt1 = findViewById(R.id.alt1);
-        alt2 = findViewById(R.id.alt2);
-        alt3 = findViewById(R.id.alt3);
-        alt4 = findViewById(R.id.alt4);
+        TextView alt1 = findViewById(R.id.alt1);
+        TextView alt2 = findViewById(R.id.alt2);
+        TextView alt3 = findViewById(R.id.alt3);
+        TextView alt4 = findViewById(R.id.alt4);
 
         textViews.add(alt1);
         textViews.add(alt2);
         textViews.add(alt3);
         textViews.add(alt4);
 
+        setPossibleAnswers();
+        makeQuestionAgain(q);
 
+    }
 
-        Quiz q = new Quiz();
+    private void setPossibleAnswers() {
+        ((Database) getApplication()).getClassmatesDB().forEach(name -> possibleAnswers.add(name.getName()));
+    }
 
-        q.randomizeAnswers( new ArrayList<String>() {{add("Simen"); add("what"); add("mathilde"); add("eple");}}, "what", textViews );
+    public void userGuess(View v) {
+        correctGuess(v, correctAnswer);
+    }
 
+    public boolean correctGuess (View v, String correctAnswer) {
+        int numberOfCorrect = 0;
+        boolean isCorrect = false;
+        String guess = ((TextView) v).getText().toString();
+        if (correctAnswer.equals(guess)) {
+            isCorrect = true;
+            startActivity(new Intent(PlayQuizActivity.this, PlayQuizActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            overridePendingTransition(0,0);
+            //setPossibleAnswers();
+            //makeQuestionAgain(q);
+            ((Database) getApplication()).increaseInt();
+            Toast.makeText(this, "" + ((Database) getApplication()).getInt(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(PlayQuizActivity.this, "Correct was: " + correctAnswer, Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor sp = getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE).edit();
+            sp.putInt("numberofcorrect", ((Database) getApplication()).getInt());
+            sp.putString("correctAnswer", correctAnswer);
+            sp.putString("guess", guess);
+            sp.apply();
+            startActivity(new Intent(this, ResultActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        }
+        return isCorrect;
     }
 
     public Drawable makeDrawable(String name) {
@@ -59,11 +86,16 @@ public class PlayQuizActivity extends AppCompatActivity {
         return d;
     }
 
+    public void makeQuestionAgain(Quiz q) {
+        correctAnswer = q.makeQuestion(possibleAnswers);
+        imageView.setImageDrawable(makeDrawable(correctAnswer));
+        q.randomizeAnswers(possibleAnswers, correctAnswer, textViews);
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         super.onBackPressed();
         return false;
     }
-
 
 }

@@ -15,11 +15,16 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        TextView tv = findViewById(R.id.numberOfCorrect);
-        SharedPreferences prefs = this.getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE);
-        String points = String.valueOf(prefs.getInt("numberofcorrect", 0));
+        TextView correct = findViewById(R.id.actuallyCorrect);
+        TextView points = findViewById(R.id.numberOfCorrect);
 
-        tv.setText(points);
+        SharedPreferences prefs = this.getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE);
+        String numberofcorrect = String.valueOf(prefs.getInt("numberofcorrect", 0));
+        String actuallyCorrect = prefs.getString("correctAnswer", "");
+        String yourGuess = prefs.getString("guess", "");
+
+        correct.setText("The correct answer was: " + actuallyCorrect + "\n" + "Your answer was: " + yourGuess);
+        points.setText("You got: " + numberofcorrect + " correct!");
 
     }
 

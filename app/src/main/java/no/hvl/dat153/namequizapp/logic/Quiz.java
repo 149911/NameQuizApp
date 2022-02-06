@@ -31,12 +31,11 @@ public class Quiz extends Application {
     This method has to make new question up until wrong answer
     return resultpage
      */
-    public void makeQuiz() {
-
+    public void playQuiz() {
     }
 
     /*
-    This method creates question with alternatives
+    This method creates question
      */
     public String makeQuestion(ArrayList<String> possibleQuestions) {
 
@@ -54,29 +53,20 @@ public class Quiz extends Application {
      * @param textViews
      */
     public void randomizeAnswers(ArrayList<String> possibleAnswers, String correctAnswer, ArrayList<TextView> textViews) {
-        int randomId = random.nextInt(textViews.size());
-        textViews.get(randomId).setText(correctAnswer);
+        ArrayList<String> temp = possibleAnswers;
+        ArrayList<TextView> tempTv = textViews;
+        int randomId = random.nextInt(3);
+        tempTv.get(randomId).setText(correctAnswer);
 
-        textViews.remove(randomId);
-        possibleAnswers.remove(correctAnswer);
+        tempTv.remove(randomId);
+        temp.remove(correctAnswer);
 
-        for (TextView tv : textViews) {
-            randomId = random.nextInt(possibleAnswers.size());
-            tv.setText(possibleAnswers.get(randomId));
-            possibleAnswers.remove(randomId);
+        for (TextView tv : tempTv) {
+            randomId = random.nextInt(temp.size());
+            tv.setText(temp.get(randomId));
+            temp.remove(randomId);
         }
-    }
 
-    /*
-    Check if clicked name is correct
-    return true if correct
-    return false if wrong
-     */
-    public boolean checkAnswer(String correctAnswer, String guess) {
-        if (correctAnswer.equals(guess)) {
-            return true;
-        }
-        return false;
     }
 
 }

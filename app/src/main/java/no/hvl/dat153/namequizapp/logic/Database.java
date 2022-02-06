@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Database extends Application {
 
     private ArrayList<ClassMate> classmatesDB = new ArrayList<>();
+    private int numberOfCorrect;
 
 
     public Database (ArrayList<ClassMate> classmatesDB) {
@@ -40,6 +41,19 @@ public class Database extends Application {
 
     public void deleteDB() {
         classmatesDB = new ArrayList<>();
+    }
+
+
+    public void createInt() {
+        numberOfCorrect = 0;
+    }
+
+    public int getInt() {
+        return numberOfCorrect;
+    }
+
+    public void increaseInt() {
+        numberOfCorrect++;
     }
 
 

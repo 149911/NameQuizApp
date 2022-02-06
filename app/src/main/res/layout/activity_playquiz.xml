@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".PlayQuizActivity"
     android:background="@color/cyan">
 
     <ImageView
@@ -37,7 +37,8 @@
 
                 android:textColor="@color/white"
                 android:background="@drawable/boxwithroundcorner"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:onClick="userGuess" />
             <TextView
                 android:id="@+id/alt2"
                 android:layout_marginRight="50dp"
@@ -45,7 +46,8 @@
 
                 android:textColor="@color/white"
                 android:background="@drawable/boxwithroundcorner"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:onClick="userGuess" />
         </TableRow>
 
         <TableRow>
@@ -59,7 +61,8 @@
 
                 android:textColor="@color/white"
                 android:background="@drawable/boxwithroundcorner"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:onClick="userGuess" />
             <TextView
                 android:id="@+id/alt4"
                 android:layout_marginRight="50dp"
@@ -68,7 +71,8 @@
 
                 android:textColor="@color/white"
                 android:background="@drawable/boxwithroundcorner"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:onClick="userGuess" />
         </TableRow>
 
     </TableLayout>

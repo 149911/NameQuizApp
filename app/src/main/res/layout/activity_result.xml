@@ -8,15 +8,28 @@
     android:background="@color/cyan">
 
     <TextView
+        android:id="@+id/actuallyCorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+
+        android:textSize="25dp"
+        android:textColor="@color/black"
+    />
+
+    <TextView
         android:id="@+id/numberOfCorrect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_below="@+id/actuallyCorrect"
 
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="100dp"
 
-        android:textSize="50dp"
+        android:textSize="25dp"
+        android:textColor="@color/black"
     />
 
     <Button
@@ -28,7 +41,7 @@
         android:backgroundTint="@color/black"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:text="@string/homepage"
 
         android:onClick="homePage"
