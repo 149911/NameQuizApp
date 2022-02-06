@@ -44,15 +44,16 @@ public class DatabaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-
-        Toast.makeText(this, ((Database) getApplication()).getClassmatesDB().size() + "", Toast.LENGTH_SHORT).show();
-
+/*
         textView = findViewById(R.id.arraylistText);
         textView.setText(((Database) getApplication()).getClassmatesDB().get(i).getName());
         imageView = findViewById(R.id.imageViewClassmate);
         imageView.setImageDrawable(makeDrawable(((Database) getApplication()).getClassmatesDB().get(i).getName()));
 
-        updateI();
+ */
+
+
+
 
     }
 
@@ -63,32 +64,6 @@ public class DatabaseActivity extends AppCompatActivity {
         return d;
     }
 
-
-
-
-    public void nextClassmate(View v) {
-
-        textView = findViewById(R.id.arraylistText);
-        imageView = findViewById(R.id.imageViewClassmate);
-
-        textView.setText(((Database) getApplication()).getClassmatesDB().get(i).getName());
-        imageView.setImageDrawable(makeDrawable(((Database) getApplication()).getClassmatesDB().get(i).getName()));
-
-        try {
-            Thread.sleep(500);
-            if (i == ((Database) getApplication()).getClassmatesDB().size() - 1) {
-                i = 0;
-            } else {
-                updateI();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void updateI () {
-        i++;
-    }
 
     public void showDialogCameraOrStorage(View v) {
         Dialog d = onCreateDialog();
@@ -103,7 +78,6 @@ public class DatabaseActivity extends AppCompatActivity {
                 Toast.makeText(DatabaseActivity.this, "Camera", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                 startActivity(intent);
-                galleryAddPic();
             }
         }).setNegativeButton(R.string.picture_storage, new DialogInterface.OnClickListener() {
             @Override
@@ -115,14 +89,6 @@ public class DatabaseActivity extends AppCompatActivity {
             }
         });
         return builder.create();
-    }
-
-    private void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File("\\storage\\emulated\\0\\Pictures\\");
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
     }
 
 

@@ -19,56 +19,95 @@
         android:layout_marginTop="50dp"
     />
 
-    <ImageView
-        android:id="@+id/imageViewClassmate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/databaseText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp"
-    />
+<ScrollView
+    android:id="@+id/scrollView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/databaseText"
+    android:layout_marginBottom="200dp">
+    <TableLayout
+        android:id="@+id/imgTable"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="200dp"
+        android:layout_below="@+id/databaseText">
 
+        <TableRow
+            android:layout_width="50dp"
+            android:layout_height="100dp">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/cat"
+            />
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/dog" />
 
+        </TableRow>
 
-    <TextView
-        android:id="@+id/arraylistText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TableRow
+            android:layout_width="50dp"
+            android:layout_height="100dp">
 
-        android:textSize="50dp"
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ferret" />
 
-        android:layout_below="@+id/imageViewClassmate"
-        android:layout_centerHorizontal="true"
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/horse" />
 
-        android:layout_marginTop="25dp"
-    />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="50dp"
+            android:layout_height="100dp">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ferret"
+                />
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/horse" />
+
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>
 
     <Button
         android:id="@+id/nextBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/scrollView"
+        android:layout_marginTop="-150dp"
 
         android:backgroundTint="@color/black"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="450dp"
-        android:layout_marginBottom="500dp"
         android:text="@string/nextText"
-        android:onClick="nextClassmate"
-    />
+        />
 
     <Button
         android:id="@+id/addBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/nextBtn"
 
         android:backgroundTint="@color/black"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="550dp"
-        android:layout_marginBottom="500dp"
         android:text="@string/addclassmate"
         android:onClick="showDialogCameraOrStorage"
-    />
+        />
 
 </RelativeLayout>
