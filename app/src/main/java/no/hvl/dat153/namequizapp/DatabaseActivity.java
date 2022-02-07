@@ -58,7 +58,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
-    static final int CAMERA_REQUEST_CODE = 2;
+    static final int GALLERY_IMAGE = 2;
 
     private int i = 0;
     Camera camera;
@@ -104,7 +104,7 @@ public class DatabaseActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
 
             }
         }).setNegativeButton(R.string.picture_storage, new DialogInterface.OnClickListener() {
@@ -113,7 +113,7 @@ public class DatabaseActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivity(intent);
+                startActivityForResult(intent, GALLERY_IMAGE);
             }
         });
         return builder.create();
@@ -122,14 +122,24 @@ public class DatabaseActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK) {
-            Uri targetUri = data.getData();
+        Uri targetUri = null;
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            bm = (Bitmap) data.getExtras().get("data");
+            ((Database) getApplication()).addClassMate(new ClassMate(bm, "nice"));
+            System.out.println( ((Database) getApplication()).getClassmatesDB().size() );
+        }
+
+        if(requestCode == GALLERY_IMAGE && resultCode == Activity.RESULT_OK) {
             try {
+                targetUri = data.getData();
                 bm = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                ((Database) getApplication()).addClassMate(new ClassMate(bm, "gello"));
+
+                System.out.println( ((Database) getApplication()).getClassmatesDB().size() );
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            ((Database) getApplication()).addClassMate(new ClassMate(bm, targetUri.toString()));
         }
     }
 
