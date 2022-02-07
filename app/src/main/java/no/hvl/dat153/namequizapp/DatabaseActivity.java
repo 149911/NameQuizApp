@@ -64,6 +64,7 @@ public class DatabaseActivity extends AppCompatActivity {
     Button addBtn;
     Bitmap bm;
     ListView listView;
+    Dialog d;
 
 
     @Override
@@ -80,9 +81,17 @@ public class DatabaseActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (d != null) {
+            d.dismiss();
+            d = null;
+        }
+    }
 
     public void showDialogCameraOrStorage(View v) {
-        Dialog d = onCreateDialog();
+        d = onCreateDialog();
         d.show();
     }
 
@@ -113,7 +122,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             bm = (Bitmap) data.getExtras().get("data");
-            ((Database) getApplication()).addClassMate(new ClassMate(bm, "nice"));
+            ((Database) getApplication()).addClassMate(new ClassMate(bm, "From Camera"));
             startActivity(new Intent(DatabaseActivity.this, DatabaseActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             overridePendingTransition(0,0);
         }
@@ -127,7 +136,7 @@ public class DatabaseActivity extends AppCompatActivity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            ((Database) getApplication()).addClassMate(new ClassMate(bm, targetUri.toString()));
+            ((Database) getApplication()).addClassMate(new ClassMate(bm, "From Gallery"));
             startActivity(new Intent(DatabaseActivity.this, DatabaseActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             overridePendingTransition(0,0);
         }
