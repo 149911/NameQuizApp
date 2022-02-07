@@ -63,19 +63,20 @@ public class PlayQuizActivity extends AppCompatActivity {
     }
 
     public boolean correctGuess (View v, String correctAnswer) {
-        int numberOfCorrect = 0;
         boolean isCorrect = false;
         String guess = ((TextView) v).getText().toString();
         if (correctAnswer.equals(guess)) {
             isCorrect = true;
             startActivity(new Intent(PlayQuizActivity.this, PlayQuizActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             overridePendingTransition(0,0);
-            ((Database) getApplication()).increaseInt();
+            ((Database) getApplication()).increaseNumberOfCorrect();
         } else {
+            ((Database) getApplication()).increaseNumberOfTries();
             SharedPreferences.Editor sp = getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE).edit();
-            sp.putInt("numberofcorrect", ((Database) getApplication()).getInt());
+            sp.putInt("numberofcorrect", ((Database) getApplication()).getNumberOfCorrect());
             sp.putString("correctAnswer", correctAnswer);
             sp.putString("guess", guess);
+            sp.putInt("tries", ((Database) getApplication()).getNumberOfTries());
             sp.apply();
             startActivity(new Intent(this, ResultActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }

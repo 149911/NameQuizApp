@@ -15,6 +15,7 @@ public class Database extends Application {
 
     private ArrayList<ClassMate> classmatesDB = new ArrayList<>();
     private int numberOfCorrect;
+    private int numberOfTries;
     //Context context;
 
 
@@ -52,16 +53,28 @@ public class Database extends Application {
         classmatesDB = new ArrayList<>();
     }
 
-    public void createInt() {
+    public void createNumberOfCorrect() {
         numberOfCorrect = 0;
     }
 
-    public int getInt() {
+    public int getNumberOfCorrect() {
         return numberOfCorrect;
     }
 
-    public void increaseInt() {
+    public void increaseNumberOfCorrect() {
         numberOfCorrect++;
+    }
+
+    public void resetCorrect() { numberOfCorrect=0; }
+
+    public void createNumberOfTries() { numberOfTries = 0; }
+
+    public int getNumberOfTries() {
+        return numberOfTries;
+    }
+
+    public void increaseNumberOfTries() {
+        numberOfTries++;
     }
 
 

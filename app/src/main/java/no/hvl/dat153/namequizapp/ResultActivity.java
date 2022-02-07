@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import no.hvl.dat153.namequizapp.logic.Database;
+
 public class ResultActivity extends AppCompatActivity {
 
     @Override
@@ -17,19 +19,23 @@ public class ResultActivity extends AppCompatActivity {
 
         TextView correct = findViewById(R.id.actuallyCorrect);
         TextView points = findViewById(R.id.numberOfCorrect);
+        TextView tries = findViewById(R.id.numberOfTries);
 
         SharedPreferences prefs = this.getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE);
         String numberofcorrect = String.valueOf(prefs.getInt("numberofcorrect", 0));
         String actuallyCorrect = prefs.getString("correctAnswer", "");
         String yourGuess = prefs.getString("guess", "");
+        String numberOfTries = String.valueOf(prefs.getInt("tries", 0));
 
         correct.setText("The correct answer was: " + actuallyCorrect + "\n" + "Your answer was: " + yourGuess);
         points.setText("You got: " + numberofcorrect + " correct!");
+        tries.setText("Number Of Tries: " + numberOfTries);
 
     }
 
     public void homePage(View v) {
-        Intent intent = new Intent(ResultActivity.this, MainActivity.class);
+        Intent intent = new Intent(ResultActivity.this, PlayQuizActivity.class);
+        ((Database) getApplication()).resetCorrect();
         startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 }
