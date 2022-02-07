@@ -25,6 +25,14 @@ public class MainActivity extends AppCompatActivity {
         ((Database) getApplication()).createDatabase();
         ((Database) getApplication()).createInt();
 
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        ((Database) getApplication()).getClassmatesDB();
     }
 
     @Override

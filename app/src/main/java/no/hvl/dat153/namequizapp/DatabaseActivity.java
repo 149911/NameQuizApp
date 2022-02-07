@@ -57,14 +57,12 @@ import no.hvl.dat153.namequizapp.logic.MyAdapter;
 public class DatabaseActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_TAKE_PHOTO = 1;
     static final int GALLERY_IMAGE = 2;
 
     private int i = 0;
     Camera camera;
     Button addBtn;
     Bitmap bm;
-    View view;
     ListView listView;
 
 
@@ -80,17 +78,8 @@ public class DatabaseActivity extends AppCompatActivity {
 
         MyAdapter adapter = new MyAdapter(this, ((Database) getApplication()).getClassmatesDB());
         listView.setAdapter(adapter);
+
     }
-
-
-
-    public Drawable makeDrawable(String name) {
-        int resId = getResources().getIdentifier(name,"drawable", DatabaseActivity.this.getPackageName());
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable d = DatabaseActivity.this.getResources().getDrawable(resId);
-
-        return d;
-    }
-
 
     public void showDialogCameraOrStorage(View v) {
         Dialog d = onCreateDialog();
@@ -103,9 +92,7 @@ public class DatabaseActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-
             }
         }).setNegativeButton(R.string.picture_storage, new DialogInterface.OnClickListener() {
             @Override
@@ -127,7 +114,8 @@ public class DatabaseActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             bm = (Bitmap) data.getExtras().get("data");
             ((Database) getApplication()).addClassMate(new ClassMate(bm, "nice"));
-            System.out.println( ((Database) getApplication()).getClassmatesDB().size() );
+            startActivity(new Intent(DatabaseActivity.this, DatabaseActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            overridePendingTransition(0,0);
         }
 
         if(requestCode == GALLERY_IMAGE && resultCode == Activity.RESULT_OK) {
@@ -140,6 +128,8 @@ public class DatabaseActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             ((Database) getApplication()).addClassMate(new ClassMate(bm, targetUri.toString()));
+            startActivity(new Intent(DatabaseActivity.this, DatabaseActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            overridePendingTransition(0,0);
         }
     }
 

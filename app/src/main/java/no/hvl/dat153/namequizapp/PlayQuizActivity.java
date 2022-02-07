@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import no.hvl.dat153.namequizapp.logic.Database;
+import no.hvl.dat153.namequizapp.logic.MyAdapter;
 import no.hvl.dat153.namequizapp.logic.Quiz;
 
 public class PlayQuizActivity extends AppCompatActivity {
@@ -27,11 +28,15 @@ public class PlayQuizActivity extends AppCompatActivity {
     private String correctAnswer;
     private ArrayList<String> possibleAnswers = new ArrayList<>();
     private Quiz q = new Quiz();
+    MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playquiz);
+
+        adapter = new MyAdapter(this, ((Database) getApplication()).getClassmatesDB());
+        adapter.notifyDataSetChanged();
 
         imageView = findViewById(R.id.imageQuiz);
         TextView alt1 = findViewById(R.id.alt1);
@@ -83,7 +88,7 @@ public class PlayQuizActivity extends AppCompatActivity {
         correctAnswer = ((Database) getApplication()).getClassmatesDB().get(indexOfCorrectAnswer).getName();
 
         imageView.setImageBitmap(bm);
-        q.randomizeAnswers(possibleAnswers, correctAnswer, textViews);
+        q.randomizeAnswers(possibleAnswers, correctAnswer, textViews, adapter);
     }
 
     @Override

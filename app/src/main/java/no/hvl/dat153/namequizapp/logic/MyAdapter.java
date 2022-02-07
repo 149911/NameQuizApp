@@ -20,6 +20,8 @@ public class MyAdapter extends ArrayAdapter<ClassMate> {
 
     private final Context context;
     private final ArrayList<ClassMate> bitmapValues;
+    ImageView imgCm;
+    TextView imgLab;
 
     public MyAdapter(Context context, ArrayList<ClassMate> bitmapValues) {
         super(context, R.layout.rowlayout2, bitmapValues);
@@ -28,7 +30,7 @@ public class MyAdapter extends ArrayAdapter<ClassMate> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ClassMate cm = getItem(position);
 
@@ -36,12 +38,20 @@ public class MyAdapter extends ArrayAdapter<ClassMate> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.rowlayout2, parent, false);
         }
 
-        ImageView imgCm = (ImageView) convertView.findViewById(R.id.icon);
-        TextView imgLab = (TextView) convertView.findViewById(R.id.imgLabel);
-
+        imgCm = (ImageView) convertView.findViewById(R.id.icon);
+        imgLab = (TextView) convertView.findViewById(R.id.imgLabel);
         imgCm.setImageBitmap( cm.getImage() );
-
         imgLab.setText( cm.getName() );
+
+        imgCm.setLongClickable(true);
+        imgCm.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                bitmapValues.remove(position);
+                notifyDataSetChanged();
+                return true;
+            }
+        });
 
         return convertView;
     }

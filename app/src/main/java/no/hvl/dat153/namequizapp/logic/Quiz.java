@@ -1,6 +1,7 @@
 package no.hvl.dat153.namequizapp.logic;
 
 import android.app.Application;
+import android.widget.Adapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -52,7 +53,8 @@ public class Quiz extends Application {
      * @param correctAnswer
      * @param textViews
      */
-    public void randomizeAnswers(ArrayList<String> possibleAnswers, String correctAnswer, ArrayList<TextView> textViews) {
+    public void randomizeAnswers(ArrayList<String> possibleAnswers, String correctAnswer, ArrayList<TextView> textViews, MyAdapter adapter) {
+
         ArrayList<String> temp = possibleAnswers;
         ArrayList<TextView> tempTv = textViews;
         int randomId = random.nextInt(3);
@@ -60,6 +62,7 @@ public class Quiz extends Application {
 
         tempTv.remove(randomId);
         temp.remove(correctAnswer);
+        adapter.notifyDataSetChanged();
 
         for (TextView tv : tempTv) {
             randomId = random.nextInt(temp.size());
