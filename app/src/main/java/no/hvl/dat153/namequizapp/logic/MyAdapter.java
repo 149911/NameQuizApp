@@ -39,11 +39,8 @@ public class MyAdapter extends ArrayAdapter<ClassMate> {
         ImageView imgCm = (ImageView) convertView.findViewById(R.id.icon);
         TextView imgLab = (TextView) convertView.findViewById(R.id.imgLabel);
 
-        System.out.println(cm.toString());
         imgCm.setImageBitmap( cm.getImage() );
 
-
-        //imgCm.setImageDrawable(cm.getImage());
         imgLab.setText( cm.getName() );
 
         return convertView;

@@ -67,7 +67,6 @@ public class PlayQuizActivity extends AppCompatActivity {
             overridePendingTransition(0,0);
             ((Database) getApplication()).increaseInt();
         } else {
-            Toast.makeText(PlayQuizActivity.this, "Correct was: " + correctAnswer, Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor sp = getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE).edit();
             sp.putInt("numberofcorrect", ((Database) getApplication()).getInt());
             sp.putString("correctAnswer", correctAnswer);

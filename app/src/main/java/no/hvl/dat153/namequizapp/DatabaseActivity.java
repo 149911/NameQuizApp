@@ -126,6 +126,7 @@ public class DatabaseActivity extends AppCompatActivity {
             Uri targetUri = data.getData();
             try {
                 bm = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                ((Database) getApplication()).addClassMate(new ClassMate(bm, "gello"));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
