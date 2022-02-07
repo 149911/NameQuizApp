@@ -3,9 +3,13 @@ package no.hvl.dat153.namequizapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import no.hvl.dat153.namequizapp.logic.ClassMate;
 import no.hvl.dat153.namequizapp.logic.Database;
 
 public class MainActivity extends AppCompatActivity {

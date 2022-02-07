@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import no.hvl.dat153.namequizapp.logic.Database;
@@ -87,8 +89,10 @@ public class PlayQuizActivity extends AppCompatActivity {
     }
 
     public void makeQuestionAgain(Quiz q) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
         correctAnswer = q.makeQuestion(possibleAnswers);
-        imageView.setImageDrawable(makeDrawable(correctAnswer));
+        Bitmap bm = (((Database) getApplication()).getClassmatesDB().get(1).getImage());
+        imageView.setImageBitmap(bm);
         q.randomizeAnswers(possibleAnswers, correctAnswer, textViews);
     }
 

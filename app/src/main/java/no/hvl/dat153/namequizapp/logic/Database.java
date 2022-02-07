@@ -1,13 +1,21 @@
 package no.hvl.dat153.namequizapp.logic;
 
 import android.app.Application;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
+
+import no.hvl.dat153.namequizapp.R;
 
 public class Database extends Application {
 
     private ArrayList<ClassMate> classmatesDB = new ArrayList<>();
     private int numberOfCorrect;
+    //Context context;
 
 
     public Database (ArrayList<ClassMate> classmatesDB) {
@@ -29,10 +37,11 @@ public class Database extends Application {
     }
 
     public Database createDatabase() {
-        addClassMate(new ClassMate("meow","cat"));
-        addClassMate(new ClassMate("neigh","horse"));
-        addClassMate(new ClassMate("woof","dog"));
-        addClassMate(new ClassMate("tspst","ferret"));
+
+        addClassMate(new ClassMate(BitmapFactory.decodeResource(getResources(), R.drawable.cat),"cat"));
+        addClassMate(new ClassMate(BitmapFactory.decodeResource(getResources(), R.drawable.horse),"horse"));
+        addClassMate(new ClassMate(BitmapFactory.decodeResource(getResources(), R.drawable.dog),"dog"));
+        addClassMate(new ClassMate(BitmapFactory.decodeResource(getResources(), R.drawable.ferret),"ferret"));
 
         Database db = new Database(classmatesDB);
 
@@ -42,7 +51,6 @@ public class Database extends Application {
     public void deleteDB() {
         classmatesDB = new ArrayList<>();
     }
-
 
     public void createInt() {
         numberOfCorrect = 0;

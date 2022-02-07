@@ -1,24 +1,30 @@
 package no.hvl.dat153.namequizapp.logic;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ClassMate {
 
-    private String sound;
+    private Bitmap image;
     private String name;
 
-    public ClassMate (String sound, String name) {
-        this.sound = sound;
+    public ClassMate (Bitmap image, String name) {
+        this.image = image;
         this.name = name;
     }
 
-    public String getSound() {
-        return sound;
+    public ClassMate() {
+
     }
 
-    public void setSound(String sound) {
-        this.sound = sound;
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -31,6 +37,6 @@ public class ClassMate {
 
     @Override
     public String toString() {
-        return "The " + name + " says: " + sound;
+        return "The " + name + " says: " + (image == null);
     }
 }
