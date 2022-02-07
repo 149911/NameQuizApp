@@ -60,7 +60,6 @@ public class DatabaseActivity extends AppCompatActivity {
     static final int GALLERY_IMAGE = 2;
 
     private int i = 0;
-    Camera camera;
     Button addBtn;
     Bitmap bm;
     ListView listView;
@@ -75,7 +74,6 @@ public class DatabaseActivity extends AppCompatActivity {
         listView = findViewById(R.id.listview);
 
         addBtn = findViewById(R.id.addBtn);
-        camera = new Camera(this, this);
 
         MyAdapter adapter = new MyAdapter(this, ((Database) getApplication()).getClassmatesDB());
         listView.setAdapter(adapter);
@@ -90,11 +88,19 @@ public class DatabaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * On click method for button add classmate
+     * @param v
+     */
     public void showDialogCameraOrStorage(View v) {
         d = onCreateDialog();
         d.show();
     }
 
+    /**
+     * Creates an popup for the user to select gallery or camera
+     * @return Dialog
+     */
     public Dialog onCreateDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(DatabaseActivity.this);
         builder.setMessage(R.string.camera_or_storage).setPositiveButton(R.string.take_photo, new DialogInterface.OnClickListener() {
@@ -115,6 +121,12 @@ public class DatabaseActivity extends AppCompatActivity {
         return builder.create();
     }
 
+    /**
+     * User adding picture from camera or gallery, added to ((Database)
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -142,6 +154,10 @@ public class DatabaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Overriden to make toolbar back button only going back without starting new activity
+     * @return
+     */
     @Override
     public boolean onSupportNavigateUp() {
         super.onBackPressed();
