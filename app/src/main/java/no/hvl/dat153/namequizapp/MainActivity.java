@@ -8,14 +8,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import no.hvl.dat153.namequizapp.logic.ClassMate;
 import no.hvl.dat153.namequizapp.logic.Database;
 
 public class MainActivity extends AppCompatActivity {
-
-    private boolean dbMade;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void playQuiz(View v) {
         Intent launchActivity = new Intent(MainActivity.this, PlayQuizActivity.class);
-        startActivity(launchActivity);
+        if ( ((Database) getApplication()).getClassmatesDB().size() < 4 ) {
+            Toast.makeText(this, "Need more entries in database", Toast.LENGTH_LONG).show();
+        } else {
+            startActivity(launchActivity);
+        }
     }
 
 }
