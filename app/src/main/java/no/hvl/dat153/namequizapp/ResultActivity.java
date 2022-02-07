@@ -33,6 +33,10 @@ public class ResultActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * homePage does return the player to new quiz
+     * @param v
+     */
     public void homePage(View v) {
         Intent intent = new Intent(ResultActivity.this, PlayQuizActivity.class);
         ((Database) getApplication()).resetCorrect();

@@ -54,14 +54,29 @@ public class PlayQuizActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Makes an alternatives-arraylist from the names in the database
+     */
     private void setPossibleAnswers() {
         ((Database) getApplication()).getClassmatesDB().forEach(name -> possibleAnswers.add(name.getName()));
     }
 
+    /**
+     * On click user guess
+     * @param v
+     */
     public void userGuess(View v) {
         correctGuess(v, correctAnswer);
     }
 
+    /**
+     * Does corresponding action for the users guess.
+     * If true new question is made
+     * If false resultpage is shown
+     * @param v
+     * @param correctAnswer
+     * @return boolean
+     */
     public boolean correctGuess (View v, String correctAnswer) {
         boolean isCorrect = false;
         String guess = ((TextView) v).getText().toString();
@@ -83,6 +98,10 @@ public class PlayQuizActivity extends AppCompatActivity {
         return isCorrect;
     }
 
+    /**
+     * Makes a question for the user to answer
+     * @param q
+     */
     public void makeQuestionAgain(Quiz q) {
         int indexOfCorrectAnswer = q.makeQuestion(possibleAnswers);
         Bitmap bm = (((Database) getApplication()).getClassmatesDB().get(indexOfCorrectAnswer).getImage());
