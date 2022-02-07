@@ -28,13 +28,6 @@ public class Quiz extends Application {
 
     }
 
-    /*
-    This method has to make new question up until wrong answer
-    return resultpage
-     */
-    public void playQuiz() {
-    }
-
     /**
      * Random int that makes the index for the question and answer
      * @param possibleQuestions
