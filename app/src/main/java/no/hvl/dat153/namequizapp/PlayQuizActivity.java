@@ -66,7 +66,6 @@ public class PlayQuizActivity extends AppCompatActivity {
             startActivity(new Intent(PlayQuizActivity.this, PlayQuizActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             overridePendingTransition(0,0);
             ((Database) getApplication()).increaseInt();
-            Toast.makeText(this, "" + ((Database) getApplication()).getInt(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(PlayQuizActivity.this, "Correct was: " + correctAnswer, Toast.LENGTH_SHORT).show();
             SharedPreferences.Editor sp = getSharedPreferences("no.hvl.dat153.namequizapp", MODE_PRIVATE).edit();

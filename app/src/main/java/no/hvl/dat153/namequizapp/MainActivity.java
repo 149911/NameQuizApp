@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void showDatabase(View v) {
         Intent launchActivity = new Intent(MainActivity.this, DatabaseActivity.class);
-        startActivity(launchActivity);
+        startActivity(launchActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 
     public void playQuiz(View v) {
