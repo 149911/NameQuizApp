@@ -33,10 +33,18 @@ public class Database extends Application {
         this.classmatesDB = classmatesDB;
     }
 
+    /**
+     * Adds classmate to database
+     * @param cm
+     */
     public void addClassMate(ClassMate cm) {
         classmatesDB.add(cm);
     }
 
+    /**
+     * Adds some entries for the initial database
+     * @return Database
+     */
     public Database createDatabase() {
 
         addClassMate(new ClassMate(BitmapFactory.decodeResource(getResources(), R.drawable.cat),"cat"));
@@ -49,30 +57,40 @@ public class Database extends Application {
         return db;
     }
 
+    // Deletes database
     public void deleteDB() {
         classmatesDB = new ArrayList<>();
     }
 
+    // Keeps track of number of correct answers.
     public void createNumberOfCorrect() {
         numberOfCorrect = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNumberOfCorrect() {
         return numberOfCorrect;
     }
 
+    // Increases the number of correct answers.
     public void increaseNumberOfCorrect() {
         numberOfCorrect++;
     }
 
+    //Resets the number of correct answers.
     public void resetCorrect() { numberOfCorrect=0; }
 
+    // Keep track of number of tries (games played)
     public void createNumberOfTries() { numberOfTries = 0; }
 
     public int getNumberOfTries() {
         return numberOfTries;
     }
 
+    // Increases the number of tries (games played)
     public void increaseNumberOfTries() {
         numberOfTries++;
     }

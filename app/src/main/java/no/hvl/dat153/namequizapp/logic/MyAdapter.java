@@ -29,6 +29,14 @@ public class MyAdapter extends ArrayAdapter<ClassMate> {
         this.bitmapValues = bitmapValues;
     }
 
+    /**
+     * Makes a new entry in a listview with picture and text
+     * Also adding a longonclicklistener that deletes an entry.
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return convertView
+     */
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 

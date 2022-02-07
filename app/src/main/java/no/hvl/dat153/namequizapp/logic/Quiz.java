@@ -35,15 +35,13 @@ public class Quiz extends Application {
     public void playQuiz() {
     }
 
-    /*
-    This method creates question
+    /**
+     * Random int that makes the index for the question and answer
+     * @param possibleQuestions
+     * @return randomId
      */
     public int makeQuestion(ArrayList<String> possibleQuestions) {
-
         int randomId = random.nextInt(possibleQuestions.size());
-
-       // String question = possibleQuestions.get(randomId);
-
         return randomId;
     }
 
