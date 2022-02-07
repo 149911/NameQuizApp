@@ -37,13 +37,13 @@ public class Quiz extends Application {
     /*
     This method creates question
      */
-    public String makeQuestion(ArrayList<String> possibleQuestions) {
+    public int makeQuestion(ArrayList<String> possibleQuestions) {
 
         int randomId = random.nextInt(possibleQuestions.size());
 
-        String question = possibleQuestions.get(randomId);
+       // String question = possibleQuestions.get(randomId);
 
-        return question;
+        return randomId;
     }
 
     /**

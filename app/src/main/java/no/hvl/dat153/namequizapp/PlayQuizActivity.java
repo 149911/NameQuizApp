@@ -65,8 +65,6 @@ public class PlayQuizActivity extends AppCompatActivity {
             isCorrect = true;
             startActivity(new Intent(PlayQuizActivity.this, PlayQuizActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             overridePendingTransition(0,0);
-            //setPossibleAnswers();
-            //makeQuestionAgain(q);
             ((Database) getApplication()).increaseInt();
             Toast.makeText(this, "" + ((Database) getApplication()).getInt(), Toast.LENGTH_SHORT).show();
         } else {
@@ -81,17 +79,11 @@ public class PlayQuizActivity extends AppCompatActivity {
         return isCorrect;
     }
 
-    public Drawable makeDrawable(String name) {
-        int resId = getResources().getIdentifier(name,"drawable", PlayQuizActivity.this.getPackageName());
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable d = PlayQuizActivity.this.getResources().getDrawable(resId);
-
-        return d;
-    }
-
     public void makeQuestionAgain(Quiz q) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        correctAnswer = q.makeQuestion(possibleAnswers);
-        Bitmap bm = (((Database) getApplication()).getClassmatesDB().get(1).getImage());
+        int indexOfCorrectAnswer = q.makeQuestion(possibleAnswers);
+        Bitmap bm = (((Database) getApplication()).getClassmatesDB().get(indexOfCorrectAnswer).getImage());
+        correctAnswer = ((Database) getApplication()).getClassmatesDB().get(indexOfCorrectAnswer).getName();
+
         imageView.setImageBitmap(bm);
         q.randomizeAnswers(possibleAnswers, correctAnswer, textViews);
     }
